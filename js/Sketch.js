@@ -144,13 +144,13 @@ function drawMuteButton(){
 function mouseClicked(){
     if(mouseX >= 10 && mouseX <= 50){
         if(mouseY >= height-50 && mouseY <= height-10){
-            bttnClickCount++;
-            if(audio['main'].isPlaying()){
+            if(audio['main'].isPlaying() && bttnClickCount>0){
                 audio['main'].stop();
             }else{
                 audio['main'].play();
                 audio['main'].loop();
             }
+            bttnClickCount++;
         }
     }
 }
