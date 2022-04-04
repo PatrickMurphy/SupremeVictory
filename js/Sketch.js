@@ -1,24 +1,33 @@
 var images = {};
 var audio = {};
-var OPTION_HAT_JIGGLE_BOOLEAN = true;
-var OPTION_HAT_JIGGLE_RANGE_PX = 4;
 var OPTION_HAT_IMAGE_URL = 'images/Hat.png';
-var OPTION_HAT_INITIAL_POSITION;
-var OPTION_CLOUD_MASK_VAL = 0.3;
-var OPTION_DUCK_IMAGE_URL = 'images/DuckAndText.png';
+var OPTION_DUCK_IMAGE_URL = 'images/DuckAndTextNoFeet.png';
+var OPTION_DUCK_LEFT_FOOT_IMAGE_URL = 'images/LeftDuckFoot.png';
+var OPTION_DUCK_RIGHT_FOOT_IMAGE_URL = 'images/RightDuckFoot.png';
 var OPTION_TEXT_HIGHLIGHT_IMAGE_URL = 'images/TextHighlight.png';
 var OPTION_MAIN_AUDIO_MUTE_IMAGE_URL = 'images/audio_volume.png';
 var OPTION_MAIN_AUDIO_UNMUTE_IMAGE_URL = 'images/audio_mute.png';
 var OPTION_MAIN_AUDIO_URL = 'audio/supremevictoryquack.mp3';
 
+var OPTION_CLOUD_MASK_VAL = 0.3; // background black areas less than equal to this (val range: 0.00-1.00)
+var OPTION_HAT_JIGGLE_BOOLEAN = true; // do jiggle hat
+var OPTION_HAT_JIGGLE_RANGE_PX = 4; // range of pixles to jiggle hat
+var OPTION_HAT_INITIAL_POSITION = [425,-10]; // init pos of hat
+var OPTION_DUCK_LEFT_FOOT_MAX_Y_HEIGHT = 40;
+var OPTION_DUCK_RIGHT_FOOT_MAX_Y_HEIGHT = 40;
+var OPTION_DUCK_FEET_SPEED_MOD = 20;
+
 var canvas_element;
 
 var xVal;
 var bttnClickCount = 0;
+var LeftDuckFootPos, RightDuckFootPos;
 
 function preload(){
     images['hat'] = loadImage(OPTION_HAT_IMAGE_URL);
     images['duck'] = loadImage(OPTION_DUCK_IMAGE_URL);
+    images['duck_foot_left'] = loadImage(OPTION_DUCK_LEFT_FOOT_IMAGE_URL);
+    images['duck_foot_right'] = loadImage(OPTION_DUCK_RIGHT_FOOT_IMAGE_URL);
     images['text_highlight'] = loadImage(OPTION_TEXT_HIGHLIGHT_IMAGE_URL);
     
     images['audio_mute'] = loadImage(OPTION_MAIN_AUDIO_MUTE_IMAGE_URL);//.resize(30,30);
@@ -30,7 +39,6 @@ function setup() {
     canvas_element = createCanvas(1280, 720);
     canvas_element.mouseOver(()=>{getAudioContext().resume()});
     
-    OPTION_HAT_INITIAL_POSITION = createVector(425,-10);
     xVal = 0;
     
     frameRate(40);
@@ -79,7 +87,47 @@ function drawClouds(){
     }
 }
 
+function drawDuckFeet(){
+    LeftDuckFootPos = createVector(452,442);
+    RightDuckFootPos = createVector(682,517);
+    drawDuckLeftFoot();
+    drawDuckRightFoot();
+}
+
+function drawDuckLeftFoot(){
+    var img_id = 'duck_foot_left';
+    var maxYHeightOption = OPTION_DUCK_LEFT_FOOT_MAX_Y_HEIGHT;
+    
+    var yMod = (frameCount * OPTION_DUCK_FEET_SPEED_MOD) % (maxYHeightOption * 2);
+    var yModVector = createVector(0,yMod);
+    
+    if(yMod <= maxYHeightOption){
+        LeftDuckFootPos.add(yModVector);
+    }else{
+        yModVector = createVector(0,maxYHeightOption*2-yMod);
+        LeftDuckFootPos.add(yModVector);
+    }
+    image(images[img_id],LeftDuckFootPos.x,LeftDuckFootPos.y);
+}
+
+function drawDuckRightFoot(){
+    var img_id = 'duck_foot_right';
+    var maxYHeightOption = OPTION_DUCK_RIGHT_FOOT_MAX_Y_HEIGHT;
+    
+    var yMod = (frameCount * OPTION_DUCK_FEET_SPEED_MOD + maxYHeightOption) % (maxYHeightOption * 2);
+    var yModVector = createVector(0,yMod);
+    
+    if(yMod <= maxYHeightOption){
+        RightDuckFootPos.add(yModVector);
+    }else{
+        yModVector = createVector(0,maxYHeightOption*2-yMod);
+        RightDuckFootPos.add(yModVector);
+    }
+    image(images[img_id],RightDuckFootPos.x,RightDuckFootPos.y);
+}
+
 function drawDuck(){
+    drawDuckFeet(); // draw under duck
     image(images['duck'],0,0);
 }
 
@@ -123,7 +171,7 @@ function drawText(){
 
 function drawHat(){
     // draw mariners hat
-    var hatPos = OPTION_HAT_INITIAL_POSITION.copy();
+    var hatPos = createVector(OPTION_HAT_INITIAL_POSITION[0],OPTION_HAT_INITIAL_POSITION[1]);
     if(OPTION_HAT_JIGGLE_BOOLEAN){
         var tmpJiggleVector = createVector(lerp(-OPTION_HAT_JIGGLE_RANGE_PX,OPTION_HAT_JIGGLE_RANGE_PX,Math.random()),lerp(-OPTION_HAT_JIGGLE_RANGE_PX,OPTION_HAT_JIGGLE_RANGE_PX,Math.random()));
         hatPos.add(tmpJiggleVector);
