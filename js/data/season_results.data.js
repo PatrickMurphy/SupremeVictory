@@ -433,5 +433,35 @@ var season_results_data = [
     "Opp": "TOR",
     "R": 6,
     "RA": 5
+  },
+  {
+    "Opp": "WAS",
+    "R": 6,
+    "RA": 4
+  },
+  {
+    "Opp": "WAS",
+    "R": 2,
+    "RA": 1
+  },
+  {
+    "Opp": "TEX",
+    "R": 6,
+    "RA": 5
+  },
+  {
+    "Opp": "TEX",
+    "R": 8,
+    "RA": 3
+  },
+  {
+    "Opp": "TEX",
+    "R": 3,
+    "RA": 2
+  },
+  {
+    "Opp": "TEX",
+    "R": 6,
+    "RA": 2
   }
 ];
