@@ -1,6 +1,15 @@
 class TextEntity extends Entity {
     constructor(location){
         super(location);
+        this.isActive = true;
+    }
+
+    getIsActive(){
+        return this.isActive;
+    }
+
+    setIsActive(activeBool){
+        this.isActive = activeBool;
     }
 
     display(){
@@ -39,8 +48,10 @@ class TextEntity extends Entity {
             }
         }
 
-        graphics.updatePixels();
-        image(graphics,this.location.x,this.location.y);
-        graphics.remove();
+        if(this.getIsActive()){
+            graphics.updatePixels();
+            image(graphics,this.location.x,this.location.y);
+            graphics.remove();
+        }
     }
 }

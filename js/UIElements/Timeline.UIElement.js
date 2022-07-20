@@ -10,10 +10,12 @@ class TimelineUIElement extends UIElement {
             // set duck image as supreme victory
             duckEntityInstance.duckBody.setDisplayImage(images['duck']);
             // display text highlight
+            duckTextEntityInstance.setIsActive(true);
         }else{
             // set duck image as no text
-            duckEntityInstance.duckBody.setDisplayImage(images['hat']);
+            duckEntityInstance.duckBody.setDisplayImage(images['duck_no_text']);
             // hide text highlight
+            duckTextEntityInstance.setIsActive(false);
         }
     }
 

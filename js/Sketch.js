@@ -1,6 +1,7 @@
 /*=========== Setup Options =============== */
 var OPTION_HAT_IMAGE_URL = 'images/Hat.png';
 var OPTION_DUCK_IMAGE_URL = 'images/DuckAndTextNoFeetCropped.png';
+var OPTION_DUCK_NO_TEXT_IMAGE_URL = 'images/DuckOnlyNoFeetCropped.png';
 var OPTION_DUCK_LEFT_FOOT_IMAGE_URL = 'images/LeftDuckFoot.png';
 var OPTION_DUCK_RIGHT_FOOT_IMAGE_URL = 'images/RightDuckFoot.png';
 var OPTION_TEXT_HIGHLIGHT_IMAGE_URL = 'images/TextHighlight.png';
@@ -35,11 +36,13 @@ var params;
 var uielements;
 var timelineUIInstance;
 var duckEntityInstance;
+var duckTextEntityInstance;
 
 /* Setup Methods */
 function preload(){
     images['hat'] = loadImage(OPTION_HAT_IMAGE_URL);
     images['duck'] = loadImage(OPTION_DUCK_IMAGE_URL);
+    images['duck_no_text'] = loadImage(OPTION_DUCK_NO_TEXT_IMAGE_URL);
     images['duck_foot_left'] = loadImage(OPTION_DUCK_LEFT_FOOT_IMAGE_URL);
     images['duck_foot_right'] = loadImage(OPTION_DUCK_RIGHT_FOOT_IMAGE_URL);
     images['text_highlight'] = loadImage(OPTION_TEXT_HIGHLIGHT_IMAGE_URL);
@@ -59,7 +62,8 @@ function setup() {
     entities.addEntity(new CloudBackdropEntity(createVector(0,0)));
     duckEntityInstance = new DuckEntity(createVector(0,0));
     entities.addEntity(duckEntityInstance);
-    entities.addEntity(new TextEntity(createVector(0,0)));
+    duckTextEntityInstance = new TextEntity(createVector(0,0));
+    entities.addEntity(duckTextEntityInstance);
 
     timelineUIInstance = new TimelineUIElement(createVector(0,0),createVector(100,100));
     uielements.addUIElement(new AudioControlUIElement());
