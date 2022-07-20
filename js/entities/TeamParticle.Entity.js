@@ -11,6 +11,7 @@ class TeamParticleEntity extends Entity {
         this.hitCount = 0;
         this.hitLimit = hit_limit || 1;
         this.otherScore = otherScore || 0;
+        this.targetedCount = 0;
 
         this.healthBar = new PercentBarUIElement(this.location,createVector(50,5),createVector(-25,50));
 
@@ -102,6 +103,26 @@ class TeamParticleEntity extends Entity {
         }else{
             return Math.max(0,(this.hitLimit-this.hitCount+scoreDiffInt)/(this.hitLimit+scoreDiffInt))
         }
+    }
+
+    getRuns(){
+        return this.hitLimit;
+    }
+
+    getRunsAgainst(){
+        return this.otherScore;
+    }
+
+    getTargetedCount(){
+        return this.targetedCount;
+    }
+
+    setTargetedCount(intVal){
+        this.targetedCount = intVal;
+    }
+
+    incrementTargetedCount(){
+        this.targetedCount++;
     }
 
     display(){

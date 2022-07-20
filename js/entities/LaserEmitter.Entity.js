@@ -21,17 +21,18 @@ class LaserEmitterEntity extends EntityCollectionEntity {
 
     validateTarget(ent){
         // fire if in range
-        if(this.distance(ent) <= this.range && ent.getHealthPCT() > 0){
+        if(this.distance(ent) <= this.range && ent.getHealthPCT() > 0 && ent.getTargetedCount() < ent.getRuns()){
             //console.log('fire ' + frameCount);
             this.lookAt(ent.location);
             this.fire(ent.getEntityID());
+            ent.incrementTargetedCount();
         }
     }
 
-    lookAt(t) {
+    lookAt(entLocation) {
         //if (debug) println("call lookAt " + stationary + "  : " + userControlled);
-        var tempVect = createVector(t.x, t.y);
-        tempVect.sub(location);
+        var tempVect = createVector(entLocation.x, entLocation.y);
+        tempVect.sub(this.location);
         tempVect.setMag(0.00001);
         this.velocity = tempVect;
     }

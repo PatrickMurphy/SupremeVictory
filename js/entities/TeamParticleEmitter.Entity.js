@@ -6,7 +6,9 @@ class TeamParticleEmitterEntity extends EmitterEntity {
         this.emitQueue = new EntityCollection();
 
         for(var i = 0; i < season_results_data.length; i++){
-            this.emitQueue.addEntity(new TeamParticleEntity(this.location.copy(),season_results_data[i].Opp, i+1, season_results_data[i].R, season_results_data[i].RA));
+            var loc = this.location.copy();
+            //loc.y = loc.y + lerp(-50,50,Math.random());
+            this.emitQueue.addEntity(new TeamParticleEntity(loc,season_results_data[i].Opp, i+1, season_results_data[i].R, season_results_data[i].RA));
         }
         /*this.emitQueue.addEntity(new TeamParticleEntity(this.location.copy(),'SD', 8,2));
         this.emitQueue.addEntity(new TeamParticleEntity(this.location.copy(),'SD', 6,2));

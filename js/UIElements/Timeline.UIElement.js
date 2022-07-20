@@ -28,6 +28,7 @@ class TimelineUIElement extends UIElement {
         OPTION_DUCK_FEET_SPEED_MOD++;
         OPTION_HAT_JIGGLE_RANGE_PX = OPTION_HAT_JIGGLE_RANGE_PX + 1;
         this.recent_result = 'WIN';
+        audio['main'].play();
     }
 
     addLoss(){
@@ -35,6 +36,7 @@ class TimelineUIElement extends UIElement {
         OPTION_DUCK_FEET_SPEED_MOD--;
         OPTION_HAT_JIGGLE_RANGE_PX = OPTION_HAT_JIGGLE_RANGE_PX - 1;
         this.recent_result = 'LOSS';
+        audio['main'].stop();
     }
 
     setWins(winInt){

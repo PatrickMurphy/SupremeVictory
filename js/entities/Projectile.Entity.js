@@ -21,12 +21,9 @@ class ProjectileEntity extends Entity {
             }
             if (ent.getEntityType() === 'TargetEntity') {
                 if (this.hitCheck(ent)) {
-                    // do hit
-                    ent.wasHit();
-
-                    if(ent.getHealthPCT()>0){
-                        this.remove();
-                    }else if(this.targetEntityUUID === ent.getEntityID() && ent.getHealthPCT()<=0){
+                    if(this.targetEntityUUID === ent.getEntityID()){
+                        // do hit
+                        ent.wasHit();
                         this.remove();
                     }
                 }

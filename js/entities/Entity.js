@@ -92,7 +92,7 @@ class Entity {
 	}
 
     wasHit(){
-        console.log(this.entity_type + " was hit");
+        //console.log(this.entity_type + " was hit");
     }
 
     getIsActive(){
