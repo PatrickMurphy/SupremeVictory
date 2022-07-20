@@ -108,7 +108,9 @@ class TeamParticleEntity extends Entity {
         //circle(this.location.x,this.location.y, 100);
         this.healthBar.setLocation(this.location);
         this.healthBar.display(this.getHealthPCT());
-        text('G:'+this.gameNumber,this.location.x-10,this.location.y+70);
+        var winOrLoss = this.hitLimit > this.otherScore ? "W" : "L";
+        var tmpTxt = 'G:'+this.gameNumber + " " + winOrLoss + " " + this.hitLimit + "-" + this.otherScore;
+        text(tmpTxt,this.location.x-textWidth(tmpTxt)/2,this.location.y+70);
         imageMode(CENTER);
         image(this.image_part,this.location.x,this.location.y);
         imageMode(CORNER);
