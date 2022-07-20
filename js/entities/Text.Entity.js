@@ -12,14 +12,7 @@ class TextEntity extends Entity {
         this.isActive = activeBool;
     }
 
-    display(){
-        let img = images['text_highlight'];
-        let graphics = createGraphics(width,height);
-        let xPosVal = ((frameCount*15) % (img.width-500))+250;
-
-        img.loadPixels();
-        graphics.loadPixels();
-
+    updateDisplayPixels(img,graphics,xPosVal){
         for (let x = 250; x < img.width-250; x++) {
             for (let y = 310; y < img.height-310; y++) {
                 // Calculate the 1D location from a 2D grid
@@ -47,8 +40,17 @@ class TextEntity extends Entity {
                 }
             }
         }
+    }
 
+    display(){
         if(this.getIsActive()){
+            var img = images['text_highlight'];
+            var graphics = createGraphics(width,height);
+            var xPosVal = ((frameCount*15) % (img.width-500))+250;
+            img.loadPixels();
+            graphics.loadPixels();
+            this.updateDisplayPixels(img,graphics,xPosVal);
+
             graphics.updatePixels();
             image(graphics,this.location.x,this.location.y);
             graphics.remove();

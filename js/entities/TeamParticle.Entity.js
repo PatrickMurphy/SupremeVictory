@@ -125,6 +125,13 @@ class TeamParticleEntity extends Entity {
         this.targetedCount++;
     }
 
+    update(){
+        super.update();
+        if(this.location.x>width/2){
+            this.remove();
+        }
+    }
+
     display(){
         //circle(this.location.x,this.location.y, 100);
         this.healthBar.setLocation(this.location);
@@ -149,11 +156,15 @@ class TeamParticleEntity extends Entity {
 
     eliminate(){
         if(this.hitLimit > this.otherScore){
-            TeamParticleEmitterEntityTMP.getEntityCollection().removeEntity(this);
+            this.remove();
             timelineUIInstance.addWin();
         }else if(this.getIsActive()){ // lost and active
             timelineUIInstance.addLoss();
         }
         this.setIsActive(false);
+    }
+
+    remove(){
+        TeamParticleEmitterEntityTMP.getEntityCollection().removeEntity(this);
     }
 }
