@@ -72,7 +72,7 @@ function setup() {
 
     // test add team logo
     //entities.addEntity(new TeamParticleEntity(createVector(-100,130),'BOS',5));
-    TeamParticleEmitterEntityTMP = new TeamParticleEmitterEntity(createVector(-100,130),65);
+    TeamParticleEmitterEntityTMP = new TeamParticleEmitterEntity(createVector(-100,130),40);
     entities.addEntity(TeamParticleEmitterEntityTMP);
     // end add entities
 

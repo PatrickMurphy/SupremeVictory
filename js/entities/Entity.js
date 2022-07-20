@@ -37,7 +37,7 @@ class Entity {
 	}
 
     display(){
-        circle(this.getLocation().x,this.getLocation().y,this.mass);
+        //circle(this.getLocation().x,this.getLocation().y,this.mass);
     }
 
     hasChildren(){

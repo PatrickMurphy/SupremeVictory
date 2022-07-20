@@ -28,6 +28,7 @@ class TeamParticleEmitterEntity extends EmitterEntity {
             }
         }
     }
+
     update(){
         super.update();
         if(this.canEmit()){

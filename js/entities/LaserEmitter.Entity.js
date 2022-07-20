@@ -52,8 +52,8 @@ class LaserEmitterEntity extends EntityCollectionEntity {
 
     display(){
         super.display();
-        fill(255);
-        rect(this.location.x,this.location.y,10,10);
+        //fill(255);
+        //rect(this.location.x,this.location.y,10,10);
     }
 
     update(){
