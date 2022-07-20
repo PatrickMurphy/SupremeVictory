@@ -15,9 +15,11 @@ class DuckEntity extends EntityCollectionEntity {
             , initialLocation: createVector(682,517)
         };
 
+        this.duckBody = new DuckBodyEntity(createVector(279,47));
+
         this.getEntityCollection().addEntity(new DuckFootEntity(left_foot_options.initialLocation,left_foot_options));//left
         this.getEntityCollection().addEntity(new DuckFootEntity(right_foot_options.initialLocation,right_foot_options));//right
-        this.getEntityCollection().addEntity(new DuckBodyEntity(createVector(279,47)));
+        this.getEntityCollection().addEntity(this.duckBody);
         this.getEntityCollection().addEntity(new DuckHatEntity(createVector(OPTION_HAT_INITIAL_POSITION[0],OPTION_HAT_INITIAL_POSITION[1])));
         this.getEntityCollection().addEntity(new LaserEmitterEntity(createVector(605,135),520,2));
     }

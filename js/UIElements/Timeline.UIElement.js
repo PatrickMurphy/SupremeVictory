@@ -2,18 +2,37 @@ class TimelineUIElement extends UIElement {
 	constructor(pos, dim) {
         super(pos,dim);
         this.record = createVector(0,0);
+        this.recent_result = 'WIN';
 	}
+
+    update() {
+        if(this.recent_result === 'WIN'){
+            // set duck image as supreme victory
+            duckEntityInstance.duckBody.setDisplayImage(images['duck']);
+            // display text highlight
+        }else{
+            // set duck image as no text
+            duckEntityInstance.duckBody.setDisplayImage(images['hat']);
+            // hide text highlight
+        }
+    }
+
 	display() {
 
 	}
 
     addWin(){
         this.record.x++;
+        OPTION_DUCK_FEET_SPEED_MOD++;
+        OPTION_HAT_JIGGLE_RANGE_PX = OPTION_HAT_JIGGLE_RANGE_PX + 1;
+        this.recent_result = 'WIN';
     }
 
     addLoss(){
-        console.log('add loss');
         this.record.y++;
+        OPTION_DUCK_FEET_SPEED_MOD--;
+        OPTION_HAT_JIGGLE_RANGE_PX = OPTION_HAT_JIGGLE_RANGE_PX - 1;
+        this.recent_result = 'LOSS';
     }
 
     setWins(winInt){

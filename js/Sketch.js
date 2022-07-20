@@ -15,7 +15,7 @@ var OPTION_HAT_JIGGLE_RANGE_PX = 4; // range of pixles to jiggle hat
 var OPTION_HAT_INITIAL_POSITION = [425,-10]; // init pos of hat
 var OPTION_DUCK_LEFT_FOOT_MAX_Y_HEIGHT = 40;
 var OPTION_DUCK_RIGHT_FOOT_MAX_Y_HEIGHT = 40;
-var OPTION_DUCK_FEET_SPEED_MOD = 20;
+var OPTION_DUCK_FEET_SPEED_MOD = 11;
 /*========================================= */
 
 var options = {'image_urls':{'HAT':OPTION_HAT_IMAGE_URL, 'DUCK':OPTION_DUCK_IMAGE_URL}};
@@ -34,6 +34,7 @@ var params_to_options_map = [
 var params;
 var uielements;
 var timelineUIInstance;
+var duckEntityInstance;
 
 /* Setup Methods */
 function preload(){
@@ -56,7 +57,8 @@ function setup() {
 
     // add entities
     entities.addEntity(new CloudBackdropEntity(createVector(0,0)));
-    entities.addEntity(new DuckEntity(createVector(0,0)));
+    duckEntityInstance = new DuckEntity(createVector(0,0));
+    entities.addEntity(duckEntityInstance);
     entities.addEntity(new TextEntity(createVector(0,0)));
 
     timelineUIInstance = new TimelineUIElement(createVector(0,0),createVector(100,100));
