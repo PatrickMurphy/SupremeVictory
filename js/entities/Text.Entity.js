@@ -5,7 +5,7 @@ class TextEntity extends Entity {
     }
 
     getIsActive(){
-        return this.isActive;
+        return this.isActive && OPTION_TEXT_HIGHLIGHT_BOOLEAN;
     }
 
     setIsActive(activeBool){

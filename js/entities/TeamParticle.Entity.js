@@ -84,14 +84,17 @@ class TeamParticleEntity extends Entity {
             'SF':createVector(3,5),
             'WAS':createVector(4,5)
         };
+
         var team_code_map = createVector(0,0);
+
         if(this.team_code_list.indexOf(team_code) > -1){
             team_code_map = this.team_code_grid_map[team_code];
         }
 
+        // get sub image from full image
         this.image_part = this.image_part.get(team_code_map.x*this.sprite_dimensions.x,team_code_map.y*this.sprite_dimensions.y,this.sprite_dimensions.x,this.sprite_dimensions.y);
 
-        this.applyForce(createVector(65,0));
+        this.applyForce(createVector(OPTION_GAME_PARTICLE_SPEED,0));
     }
 
     update(){

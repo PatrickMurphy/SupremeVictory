@@ -17,6 +17,8 @@ var OPTION_HAT_INITIAL_POSITION = [425,-10]; // init pos of hat
 var OPTION_DUCK_LEFT_FOOT_MAX_Y_HEIGHT = 40;
 var OPTION_DUCK_RIGHT_FOOT_MAX_Y_HEIGHT = 40;
 var OPTION_DUCK_FEET_SPEED_MOD = 11;
+var OPTION_GAME_PARTICLE_SPEED = 80;
+var OPTION_TEXT_HIGHLIGHT_BOOLEAN = false; // disabled for performance
 /*========================================= */
 
 var options = {'image_urls':{'HAT':OPTION_HAT_IMAGE_URL, 'DUCK':OPTION_DUCK_IMAGE_URL}};
