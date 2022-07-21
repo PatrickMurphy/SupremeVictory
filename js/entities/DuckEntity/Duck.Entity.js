@@ -40,7 +40,7 @@ class DuckEntity extends EntityCollectionEntity {
             this.updateHealthBarColor();
             this.healthBar.display(timelineUIInstance.getHealthPCT());
             fill(255);
-            text("Record: " + timelineUIInstance.getWins() + "-" + timelineUIInstance.getLosses() + "    AVG: "+timelineUIInstance.getAVG(),this.location.x+600,this.location.y+497);
+            text("Record: " + timelineUIInstance.getWins() + "-" + timelineUIInstance.getLosses() + "    AVG: "+timelineUIInstance.getAVG() + "    GB500: " + timelineUIInstance.getGamesFrom500(),this.location.x+600,this.location.y+497);
         }
     }
 }
