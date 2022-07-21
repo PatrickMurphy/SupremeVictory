@@ -72,7 +72,7 @@ function setup() {
 
     // test add team logo
     //entities.addEntity(new TeamParticleEntity(createVector(-100,130),'BOS',5));
-    TeamParticleEmitterEntityTMP = new TeamParticleEmitterEntity(createVector(-100,130),40);
+    TeamParticleEmitterEntityTMP = new TeamParticleEmitterEntity(createVector(-40,130),40);
     entities.addEntity(TeamParticleEmitterEntityTMP);
     // end add entities
 
@@ -80,7 +80,7 @@ function setup() {
     canvas_element = createCanvas(1280, 720);
     canvas_element.mouseOver(()=>{getAudioContext().resume()});
     
-    frameRate(30);
+    frameRate(60);
     noStroke();
     
     images['audio_mute'].resize(30,30);

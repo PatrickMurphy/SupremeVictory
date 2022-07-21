@@ -13,7 +13,7 @@ class TeamParticleEntity extends Entity {
         this.otherScore = otherScore || 0;
         this.targetedCount = 0;
 
-        this.healthBar = new PercentBarUIElement(this.location,createVector(50,5),createVector(-25,50));
+        this.healthBar = new PercentBarUIElement(this.location,createVector(50,5),createVector(-25,40));
 
         // static map
         this.team_code_list = ['ATL',
@@ -23,7 +23,7 @@ class TeamParticleEntity extends Entity {
                                 'STL',
                                 'CHC',
                                 'DET',
-                                'KAN',
+                                'KCR',
                                 'LAA',
                                 'LAD',
                                 'CIN',
@@ -38,12 +38,12 @@ class TeamParticleEntity extends Entity {
                                 'TOR',
                                 'COL',
                                 'TEX',
-                                'TB',
+                                'TBR',
                                 'SEA',
                                 'OAK',
-                                'CWS',
+                                'CHW',
                                 'MIN',
-                                'SD',
+                                'SDP',
                                 'SF',
                                 'WAS'];
 
@@ -56,7 +56,7 @@ class TeamParticleEntity extends Entity {
 
             'CHC':createVector(0,1),
             'DET':createVector(1,1),
-            'KAN':createVector(2,1),
+            'KCR':createVector(2,1),
             'LAA':createVector(3,1),
             'LAD':createVector(4,1),
 
@@ -74,13 +74,13 @@ class TeamParticleEntity extends Entity {
 
             'COL':createVector(0,4),
             'TEX':createVector(1,4),
-            'TB':createVector(2,4),
+            'TBR':createVector(2,4),
             'SEA':createVector(3,4),
             'OAK':createVector(4,4),
 
-            'CWS':createVector(0,5),
+            'CHW':createVector(0,5),
             'MIN':createVector(1,5),
-            'SD':createVector(2,5),
+            'SDP':createVector(2,5),
             'SF':createVector(3,5),
             'WAS':createVector(4,5)
         };
@@ -91,18 +91,50 @@ class TeamParticleEntity extends Entity {
 
         this.image_part = this.image_part.get(team_code_map.x*this.sprite_dimensions.x,team_code_map.y*this.sprite_dimensions.y,this.sprite_dimensions.x,this.sprite_dimensions.y);
 
-        this.applyForce(createVector(60,0));
+        this.applyForce(createVector(65,0));
+    }
+
+    update(){
+        super.update();
+
+        // if the particle gets halfway through the frame remove it
+        if(this.location.x > width/2){
+            this.remove();
+        }
+    }
+
+    display(){
+        //circle(this.location.x,this.location.y, 100);
+        this.healthBar.setLocation(this.location);
+        this.healthBar.display(this.getHealthPCT());
+
+        var winOrLoss = this.hitLimit > this.otherScore ? "W" : "L";
+        var tmpTxt = 'G:'+this.gameNumber + " " + winOrLoss + " " + this.hitLimit + "-" + this.otherScore;
+        text(tmpTxt,this.location.x-textWidth(tmpTxt)/2,this.location.y+60);
+
+        imageMode(CENTER);
+        image(this.image_part,this.location.x,this.location.y);
+        imageMode(CORNER);
     }
 
     getHealthPCT(){
-        var scoreDiffInt = this.otherScore-this.hitLimit; // if positive we lost, if negitive we win
-        var scoreWinBool = this.hitLimit > this.otherScore;
-
-        if(scoreWinBool){
-            return Math.max(0,(this.hitLimit-this.hitCount)/(this.hitLimit));
+        if(this.getGameWon()){
+            return Math.max(0,(this.getRuns()-this.getCurrentHitCount())/(this.getRuns()));
         }else{
-            return Math.max(0,(this.hitLimit-this.hitCount+scoreDiffInt)/(this.hitLimit+scoreDiffInt))
+            return Math.max(0,(this.getRuns()-this.getCurrentHitCount()+(this.getRunDifferential()*-1))/(this.getRuns()+(this.getRunDifferential()*-1)));
         }
+    }
+
+    getCurrentHitCount(){
+        return this.hitCount;
+    }
+
+    getGameWon(){
+        return this.getRuns() > this.getRunsAgainst();
+    }
+
+    getRunDifferential(){
+        return this.getRuns()-this.getRunsAgainst();
     }
 
     getRuns(){
@@ -123,25 +155,6 @@ class TeamParticleEntity extends Entity {
 
     incrementTargetedCount(){
         this.targetedCount++;
-    }
-
-    update(){
-        super.update();
-        if(this.location.x>width/2){
-            this.remove();
-        }
-    }
-
-    display(){
-        //circle(this.location.x,this.location.y, 100);
-        this.healthBar.setLocation(this.location);
-        this.healthBar.display(this.getHealthPCT());
-        var winOrLoss = this.hitLimit > this.otherScore ? "W" : "L";
-        var tmpTxt = 'G:'+this.gameNumber + " " + winOrLoss + " " + this.hitLimit + "-" + this.otherScore;
-        text(tmpTxt,this.location.x-textWidth(tmpTxt)/2,this.location.y+70);
-        imageMode(CENTER);
-        image(this.image_part,this.location.x,this.location.y);
-        imageMode(CORNER);
     }
 
     wasHit(){
